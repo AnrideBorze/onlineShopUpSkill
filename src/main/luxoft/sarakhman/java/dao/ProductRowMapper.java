@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-public class ProductMapper {
+public class ProductRowMapper {
 
 
-    public Product mapRow(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("id");
+    public static Product mapRow(ResultSet resultSet) throws SQLException {
+        int id = 0;
+        id = resultSet.getInt("id");
         String name = resultSet.getString("name");
         double price = resultSet.getDouble("price");
         Timestamp creationDate = resultSet.getTimestamp("creation_date");
@@ -20,5 +21,7 @@ public class ProductMapper {
         product.setPrice(price);
         product.setCreationDate(creationDate);
         return product;
+
     }
+
 }

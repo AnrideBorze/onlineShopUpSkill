@@ -1,35 +1,38 @@
 package dao;
 
-import config.PropertiesHolder;
 import entity.Product;
 
+
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.ResultSet;
 
 public class JDBCProductDao implements ProductDao {
+
+    private ConnectionFactory connectionFactory;
 
 
     private static final String ADD = "INSERT INTO products (name, price, creation_date) VALUES (?, ?, ?);";
     private static final String FIND_ALL_SQL = "SELECT id, name, price, creation_date FROM products;";
 
-    private static final ProductMapper PRODUCT_MAPPER = new ProductMapper();
-    private static final PropertiesHolder propertiesHolder = new PropertiesHolder();
 
-    protected static Connection connect() {
-        try {
-            return DriverManager.getConnection(propertiesHolder.getUrl(),
-                    propertiesHolder.getName(),
-                    propertiesHolder.getPassword());
+    public List<Product> findAll() {
+        try (Connection connection = connectionFactory.getConnect();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_SQL);
+             ResultSet resultSet = preparedStatement.executeQuery();) {
+
+            List<Product> products = new ArrayList<>();
+            while (resultSet.next()) {
+                Product product = ProductRowMapper.mapRow(resultSet);
+                products.add(product);
+            }
+            return products;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public List<Product> findAll() {
-        return new ArrayList<>();
     }
 
     public Product addProduct(Product product) {

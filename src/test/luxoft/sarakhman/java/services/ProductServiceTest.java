@@ -8,8 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class ProductServiceTest {
@@ -104,6 +103,7 @@ public class ProductServiceTest {
         verify(mockDao.updateProduct(product));
 
     }
+
     @Test
     public void deleteProductChangeSizeOfDB() {
         List<Product> prepareProducts = creatingTwoProducts();
@@ -113,17 +113,17 @@ public class ProductServiceTest {
         when(mockDao.findAll()).thenReturn(prepareProducts);
 
         List<Product> productsBeforeDelete = productService.findAll();
-        assertEquals(2,productsBeforeDelete.size());
+        assertEquals(2, productsBeforeDelete.size());
         assertFalse(productsBeforeDelete.isEmpty());
 
         productService.deleteProduct(1);
         List<Product> currentProducts = productService.findAll();
-        assertEquals(1,currentProducts.size());
+        assertEquals(1, currentProducts.size());
         assertFalse(currentProducts.isEmpty());
 
         productService.deleteProduct(0);
         currentProducts = productService.findAll();
-        assertEquals(0,currentProducts.size());
+        assertEquals(0, currentProducts.size());
         assertTrue(currentProducts.isEmpty());
     }
 
@@ -136,12 +136,12 @@ public class ProductServiceTest {
         when(mockDao.findAll()).thenReturn(prepareProducts);
 
         List<Product> productsBeforeDelete = productService.findAll();
-        assertEquals(0,productsBeforeDelete.size());
+        assertEquals(0, productsBeforeDelete.size());
         assertTrue(productsBeforeDelete.isEmpty());
 
         productService.deleteProduct(1);
         List<Product> currentProducts = productService.findAll();
-        assertEquals(0,currentProducts.size());
+        assertEquals(0, currentProducts.size());
         assertTrue(currentProducts.isEmpty());
 
 

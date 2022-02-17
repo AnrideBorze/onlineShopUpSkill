@@ -1,7 +1,6 @@
 package entity;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 public class Product {
 
@@ -40,5 +39,15 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", creationDate=" + creationDate +
+                '}';
     }
 }

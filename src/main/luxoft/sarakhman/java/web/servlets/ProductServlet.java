@@ -2,7 +2,7 @@ package web.servlets;
 
 import entity.Product;
 import services.ProductService;
-import templater.PageGenerator;
+import web.servlets.templater.PageGenerator;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

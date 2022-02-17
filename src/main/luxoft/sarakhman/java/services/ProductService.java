@@ -1,15 +1,16 @@
 package services;
 
-import dao.JDBCProductDao;
+import dao.ProductDao;
 import entity.Product;
 
 import java.util.List;
 
-public class ProductService {
-    private JDBCProductDao productDao;
 
-    public ProductService(JDBCProductDao JDBCProductDao) {
-        this.productDao = JDBCProductDao;
+public class ProductService {
+    private ProductDao productDao;
+
+    public ProductService(ProductDao productDao) {
+        this.productDao = productDao;
     }
 
     public List<Product> findAll() {
@@ -20,10 +21,11 @@ public class ProductService {
         return productDao.addProduct(product);
     }
 
-    public Product updateProduct(Product product){
+    public Product updateProduct(Product product) {
         return productDao.updateProduct(product);
     }
 
     public Product deleteProduct(long id) {
-        return productDao.deleteProduct(id);    }
+        return productDao.deleteProduct(id);
+    }
 }

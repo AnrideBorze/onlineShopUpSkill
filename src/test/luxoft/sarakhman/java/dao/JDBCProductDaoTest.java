@@ -16,6 +16,7 @@ public class JDBCProductDaoTest {
 
     @Test
     public void getAllProductsWorkCorrectly() {
+
     }
 
     @Test

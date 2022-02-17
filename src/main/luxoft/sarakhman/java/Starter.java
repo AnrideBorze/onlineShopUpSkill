@@ -1,3 +1,4 @@
+import config.PropertiesHolder;
 import dao.JDBCProductDao;
 import services.ProductService;
 import web.servlets.ProductServlet;
@@ -10,6 +11,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 
 public class Starter {
     public static void main(String[] args) throws Exception {
+        PropertiesHolder propertiesHolder = new PropertiesHolder("application.properties");
 
         JDBCProductDao jdbcProductDao = new JDBCProductDao();
 

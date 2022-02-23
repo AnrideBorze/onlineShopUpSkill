@@ -1,4 +1,4 @@
-package web.servlets.servlets;
+package web.servlets;
 
 import services.ProductService;
 

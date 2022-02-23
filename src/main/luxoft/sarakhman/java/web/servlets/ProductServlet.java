@@ -1,8 +1,8 @@
-package web.servlets.servlets;
+package web.servlets;
 
 import entity.Product;
 import services.ProductService;
-import web.servlets.templater.PageGenerator;
+import web.templater.PageGenerator;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package web.servlets.templater;
+package web.templater;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

@@ -10,8 +10,7 @@ public class ProductRowMapper {
 
 
     public static Product mapRow(ResultSet resultSet) throws SQLException {
-        int id = 0;
-        id = resultSet.getInt("id");
+        int id = resultSet.getInt("id");
         String name = resultSet.getString("name");
         double price = resultSet.getDouble("price");
         Timestamp creationDate = resultSet.getTimestamp("creation_date");

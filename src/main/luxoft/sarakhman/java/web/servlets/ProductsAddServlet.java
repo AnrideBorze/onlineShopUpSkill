@@ -1,4 +1,4 @@
-package web.servlets.servlets;
+package web.servlets;
 
 import entity.Product;
 import services.ProductService;

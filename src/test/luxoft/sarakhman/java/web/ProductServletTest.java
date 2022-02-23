@@ -1,9 +1,9 @@
-package web.servlets;
+package web;
 
 import entity.Product;
 import org.junit.jupiter.api.Test;
 import services.ProductService;
-import web.servlets.servlets.ProductServlet;
+import web.servlets.ProductServlet;
 
 
 import javax.servlet.http.HttpServletRequest;

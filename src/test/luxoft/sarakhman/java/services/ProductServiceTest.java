@@ -22,7 +22,7 @@ public class ProductServiceTest {
 
 
         productService.findAll();
-        verify(mockDao.findAll());
+        verify(mockDao).findAll();
     }
 
     @Test
@@ -32,7 +32,7 @@ public class ProductServiceTest {
         Product product = new Product();
 
         productService.addProduct(product);
-        verify(mockDao.addProduct(product));
+        verify(mockDao).addProduct(product);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class ProductServiceTest {
         Product product = new Product();
 
         productService.updateProduct(product);
-        verify(mockDao.updateProduct(product));
+        verify(mockDao).updateProduct(product);
 
     }
 
@@ -100,7 +100,7 @@ public class ProductServiceTest {
         Product product = new Product();
 
         productService.updateProduct(product);
-        verify(mockDao.updateProduct(product));
+        verify(mockDao).updateProduct(product);
 
     }
 

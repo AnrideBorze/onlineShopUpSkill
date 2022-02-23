@@ -22,10 +22,25 @@ public class ProductService {
     }
 
     public Product updateProduct(Product product) {
-        return productDao.updateProduct(product);
+        Product oldProduct = productDao.getById(product.getId());
+        Product newProduct = new Product();
+        if (product.getName() != null && product.getName().length() > 0) {
+            newProduct.setName(product.getName());
+        } else {
+            newProduct.setName(oldProduct.getName());
+        }
+        if (product.getPrice() > 0) {
+            newProduct.setPrice(product.getPrice());
+        } else {
+            newProduct.setPrice(oldProduct.getPrice());
+        }
+        newProduct.setCreationDate(oldProduct.getCreationDate());
+        newProduct.setId(product.getId());
+        productDao.updateProduct(newProduct);
+        return oldProduct;
     }
 
-    public Product deleteProduct(long id) {
+    public Boolean deleteProduct(long id) {
         return productDao.deleteProduct(id);
     }
 }

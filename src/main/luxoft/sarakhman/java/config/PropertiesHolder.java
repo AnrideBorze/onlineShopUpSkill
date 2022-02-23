@@ -17,11 +17,11 @@ public class PropertiesHolder {
     }
 
     public String getName() {
-        return DB_URL_PROPERTY_NAME;
+        return DB_NAME_PROPERTY_NAME;
     }
 
     public String getPassword() {
-        return DB_URL_PROPERTY_NAME;
+        return DB_PASSWORD_PROPERTY_NAME;
     }
 
     public PropertiesHolder(String path) {

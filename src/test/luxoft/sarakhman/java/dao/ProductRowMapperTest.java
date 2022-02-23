@@ -18,8 +18,6 @@ public class ProductRowMapperTest {
     @Test
     public void rowMapWorkCorrectly() throws SQLException {
         Product expectedProduct = createProduct();
-        ProductRowMapper productRowMapper = new ProductRowMapper();
-
 
         ResultSet resultSet = mock(ResultSet.class);
 
@@ -29,7 +27,7 @@ public class ProductRowMapperTest {
         when(resultSet.getTimestamp("creation_date")).thenReturn(Timestamp.valueOf("2018-09-01 11:00:00"));
 
 
-        Product actualProduct = productRowMapper.mapRow(resultSet);
+        Product actualProduct = ProductRowMapper.mapRow(resultSet);
 
         assertEquals(expectedProduct, actualProduct);
         assertNotNull(actualProduct);

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dataset>
-    <PRODUCTS id='1' name='Grey T-Shirt' price='17.99' creationDate='2019-03-20'/>
-    <PRODUCTS id='2' name='Fitted Hat' price='29.99' creationDate='2019-03-21'/>
-    <PRODUCTS id='3' name='Backpack' price='54.99' creationDate='2019-03-22'/>
-    <PRODUCTS id='4' name='Earrings' price='14.99' creationDate='2019-03-23'/>
-    <PRODUCTS id='5' name='Socks' price='9.99' creationDate='2019-03-13'/>
-</dataset>

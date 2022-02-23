@@ -3,6 +3,7 @@ package web.servlets;
 import entity.Product;
 import org.junit.jupiter.api.Test;
 import services.ProductService;
+import web.servlets.servlets.ProductServlet;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ public class ProductServletTest {
         HttpServletResponse response = mock(HttpServletResponse.class);
 
         productServlet.doGet(request, response);
-        verify(productServlet.findAll());
+        verify(productServlet).findAll();
     }
 
     @Test

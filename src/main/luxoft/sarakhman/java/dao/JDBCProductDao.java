@@ -15,8 +15,10 @@ public class JDBCProductDao implements ProductDao {
     private ConnectionFactory connectionFactory;
 
 
-    private static final String ADD = "INSERT INTO products (name, price, creation_date) VALUES (?, ?, ?);";
+    private static final String ADD_SQL = "INSERT INTO products (name, price, creation_date) VALUES (?, ?, ?);";
     private static final String FIND_ALL_SQL = "SELECT id, name, price, creation_date FROM products;";
+    private static final String FIND_BY_ID_SQL = "SELECT id, name, price, creation_date FROM products WHERE id = ?";
+    private static final String DELETE_BY_ID_SQL = "DELETE FROM products where id = ?";
 
 
     public List<Product> findAll() {
@@ -36,15 +38,44 @@ public class JDBCProductDao implements ProductDao {
     }
 
     public Product addProduct(Product product) {
-        return product;
+        try (Connection connection = connectionFactory.getConnect();
+             PreparedStatement preparedStatement = connection.prepareStatement(ADD_SQL)) {
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getPrice());
+            preparedStatement.setTimestamp(3, product.getCreationDate());
+            preparedStatement.executeQuery();
+            return product;
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed adding product to db", e);
+        }
     }
 
     public Product updateProduct(Product product) {
+        deleteProduct(product.getId());
+        addProduct(product);
         return product;
     }
 
-    public Product deleteProduct(long id) {
-        return new Product();
+    public Boolean deleteProduct(long id) {
+        try (Connection connection = connectionFactory.getConnect();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID_SQL)) {
+            preparedStatement.setLong(1,id);
+            preparedStatement.execute();
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException("Deleting product was failed", e);
+        }
     }
 
+    public Product getById(long id) {
+        try (Connection connection = connectionFactory.getConnect();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID_SQL);
+             ResultSet resultSet = preparedStatement.executeQuery();) {
+            Product product = ProductRowMapper.mapRow(resultSet);
+
+            return product;
+        } catch (SQLException e) {
+            throw new RuntimeException("Cannot find the product with this id", e);
+        }
+    }
 }

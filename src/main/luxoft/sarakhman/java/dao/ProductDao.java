@@ -13,5 +13,6 @@ public interface ProductDao {
 
     public Product updateProduct(Product product);
 
-    public Product deleteProduct(long id);
+    public Boolean deleteProduct(long id);
+    public Product getById(long id);
 }

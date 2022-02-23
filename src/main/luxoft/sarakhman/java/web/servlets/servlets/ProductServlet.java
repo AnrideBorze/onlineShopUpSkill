@@ -1,4 +1,4 @@
-package web.servlets;
+package web.servlets.servlets;
 
 import entity.Product;
 import services.ProductService;
@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ProductServlet extends HttpServlet {
 
-    ProductService productService;
+    private final ProductService productService;
 
     public ProductServlet(ProductService productService) {
         this.productService = productService;

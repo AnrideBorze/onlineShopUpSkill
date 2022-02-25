@@ -33,7 +33,7 @@ public class Starter {
 
         ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
 
-        SecurityFilter securityFilter = new SecurityFilter();
+        SecurityFilter securityFilter = new SecurityFilter(securityService);
 
         ProductsAddServlet productsAddServlet = new ProductsAddServlet(productService);
         ProductServlet productServlet = new ProductServlet(productService);

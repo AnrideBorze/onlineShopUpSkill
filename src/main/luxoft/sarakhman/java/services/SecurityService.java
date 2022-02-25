@@ -26,8 +26,27 @@ public class SecurityService {
         String token = UUID.randomUUID().toString();
 
         Cookie cookie = new Cookie(tokenName, token);
+        tokens.add(token);
+
         return cookie;
 
+    }
+
+    public boolean checkToken(Cookie[] cookies){
+        String cookieValue = null;
+        for (Cookie cookie : cookies) {
+            if(cookie.getName().equals("user-token")){
+                cookieValue = cookie.getValue();
+            }
+        }
+        if(cookieValue!=null){
+            for (String token : tokens) {
+                if(token.equals(cookieValue)){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 

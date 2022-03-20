@@ -28,7 +28,7 @@ public class ProductUpdateServlet extends HttpServlet {
 
     private Product creatingProduct(HttpServletRequest request) {
         String name = request.getParameter("name");
-        Double price = Double.valueOf(request.getParameter("price"));
+        double price = Double.parseDouble(request.getParameter("price"));
         int id = Integer.parseInt(request.getParameter("id"));
         Product product = new Product();
         product.setName(name);

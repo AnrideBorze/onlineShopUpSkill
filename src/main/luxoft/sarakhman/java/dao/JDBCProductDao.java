@@ -3,6 +3,7 @@ package dao;
 import entity.Product;
 
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,7 +13,7 @@ import java.sql.ResultSet;
 
 public class JDBCProductDao implements ProductDao {
 
-    private ConnectionFactory connectionFactory;
+    private final DataSource dataSource;
 
 
     private static final String ADD_SQL = "INSERT INTO products (name, price, creation_date) VALUES (?, ?, ?);";
@@ -20,9 +21,13 @@ public class JDBCProductDao implements ProductDao {
     private static final String FIND_BY_ID_SQL = "SELECT id, name, price, creation_date FROM products WHERE id = ?";
     private static final String DELETE_BY_ID_SQL = "DELETE FROM products where id = ?";
 
+    public JDBCProductDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
 
     public List<Product> findAll() {
-        try (Connection connection = connectionFactory.getConnect();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_SQL);
              ResultSet resultSet = preparedStatement.executeQuery();) {
 
@@ -38,7 +43,7 @@ public class JDBCProductDao implements ProductDao {
     }
 
     public Product addProduct(Product product) {
-        try (Connection connection = connectionFactory.getConnect();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_SQL)) {
             preparedStatement.setString(1, product.getName());
             preparedStatement.setDouble(2, product.getPrice());
@@ -57,7 +62,7 @@ public class JDBCProductDao implements ProductDao {
     }
 
     public Boolean deleteProduct(long id) {
-        try (Connection connection = connectionFactory.getConnect();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID_SQL)) {
             preparedStatement.setLong(1,id);
             preparedStatement.execute();
@@ -68,7 +73,7 @@ public class JDBCProductDao implements ProductDao {
     }
 
     public Product getById(long id) {
-        try (Connection connection = connectionFactory.getConnect();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID_SQL);
              ResultSet resultSet = preparedStatement.executeQuery();) {
             Product product = ProductRowMapper.mapRow(resultSet);

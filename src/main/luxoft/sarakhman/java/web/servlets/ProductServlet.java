@@ -21,7 +21,7 @@ public class ProductServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) {
         List<Product> productList = findAll();
 
         response.setStatus(HttpServletResponse.SC_OK);
@@ -37,7 +37,7 @@ public class ProductServlet extends HttpServlet {
         }
     }
 
-    protected List<Product> findAll() {
+    public List<Product> findAll() {
         return productService.findAll();
     }
 }

@@ -2,22 +2,23 @@ package web.filters;
 
 import services.SecurityService;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-public class SecurityFilter extends HttpFilter {
+public class SecurityFilter implements Filter {
     private final SecurityService securityService;
 
     public SecurityFilter(SecurityService securityService) {
         this.securityService = securityService;
+    }
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
     }
 
     @Override
@@ -36,6 +37,11 @@ public class SecurityFilter extends HttpFilter {
         } else {
             chain.doFilter(request, response);
         }
+
+    }
+
+    @Override
+    public void destroy() {
 
     }
 }
